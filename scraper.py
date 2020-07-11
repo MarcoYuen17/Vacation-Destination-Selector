@@ -21,5 +21,3 @@ dataframe = pd.DataFrame({'Place':places, 'Description':descriptions})
 dataframe.to_csv('places_descriptions.csv', index=False, encoding='utf-8')
 
 webdriver.close()
-
-# print(beautifulSoup)
