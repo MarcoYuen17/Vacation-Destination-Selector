@@ -9,56 +9,59 @@
     </head>
 
     <body>
-        <form method='POST' action=''>
+        <form method='POST'>
             <section class='question'>
                 <label for='kind'>What kind of place would you like to go to?<!--ex. america, warm--></label>
                 <input type='text' name='kind' id='kind'>
             </section>
             <section class='submission'>
-                <input type='submit' value='Submit'>
+                <!-- <input type='submit' value='Submit'> -->
+                <button onclick='return submitKeyword();'>Submit</button>
             </section>
         </form>
 
         <section class='results_and_selections'>
             <div class='left'>
-                <h4 class='results_from_search'></h4>
-                <form method='POST' action=''>
-                    <label for='result1'></label>
+                <h3>Results from search</h3>
+                <form method='POST'>
+                    <h5>Please check the countries you would like to add to your list of selections.</h5>
+                    <label for='result1' id='result1label'></label>
                     <input type='checkbox' name='result1' id='result1' value='result1'>
-                    
+                    <br>
                     <label for='result2'></label>
                     <input type='checkbox' name='result2' id='result2' value='result2'>
-                    
+                    <br>
                     <label for='result3'></label>
                     <input type='checkbox' name='result3' id='result3' value='result3'>
-                    
+                    <br>
                     <label for='result4'></label>
                     <input type='checkbox' name='result4' id='result4' value='result4'>
-                    
+                    <br>
                     <label for='result5'></label>
                     <input type='checkbox' name='result5' id='result5' value='result5'>
-                    
+                    <br>
                     <label for='result6'></label>
                     <input type='checkbox' name='result6' id='result6' value='result6'>
-                    
+                    <br>
                     <label for='result7'></label>
                     <input type='checkbox' name='result7' id='result7' value='result7'>
-                    
+                    <br>
                     <label for='result8'></label>
                     <input type='checkbox' name='result8' id='result8' value='result8'>
-                    
+                    <br>
                     <label for='result9'></label>
                     <input type='checkbox' name='result9' id='result9' value='result9'>
-                    
+                    <br>
                     <label for='result10'></label>
                     <input type='checkbox' name='result10' id='result10' value='result10'>
-
-                    <input type='submit' value='Update'>
+                    <br>
+                    <br>
+                    <button onclick='updateSelections()'>Update</button>
                 </form>
             </div>
 
             <div class='right'>
-                <h4>Selections</h4>
+                <h3>Selections</h3>
                 <ul>
                     <li class='selection1'></li>
                     <li class='selection2'></li>

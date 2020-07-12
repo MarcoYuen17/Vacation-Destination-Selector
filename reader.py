@@ -1,4 +1,5 @@
 import pandas as pd
+import sys
 
 dataframe = pd.read_csv('places_descriptions.csv')
 
@@ -12,6 +13,17 @@ while i < len(places):
     description = dictionary_from_dataframe.get('Description')[i]
     dictionary[place] = description
     i += 1
+
+def findCountriesWithKeyword(keyword):
+    countries = []
+    for country in dictionary:
+        if (keyword in dictionary[country]):
+            countries.append(country)
+    return countries
+
+keyword = sys.argv[1]
+print(findCountriesWithKeyword(keyword))
+sys.stdout.flush()
 
 #Might be better to leave data with indices that way easier to recommend
 

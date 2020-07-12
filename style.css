@@ -1,0 +1,19 @@
+.results_and_selections {
+    display: flex;
+}
+
+.left {
+    width: 50%;
+}
+
+.right {
+    width: 50%;
+}
+
+.results_and_selections {
+    margin-top: 50px;
+}
+
+.random_chooser {
+    margin-top: 100px;
+}
