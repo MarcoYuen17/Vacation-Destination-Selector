@@ -1,5 +1,9 @@
+from flask import Flask, render_template, request, redirect, Response
+import random, json
 import pandas as pd
-import sys
+# import sys
+
+app = Flask(__name__)
 
 dataframe = pd.read_csv('places_descriptions.csv')
 
@@ -21,10 +25,19 @@ def findCountriesWithKeyword(keyword):
             countries.append(country)
     return countries
 
-keyword = sys.argv[1]
-print(findCountriesWithKeyword(keyword))
-sys.stdout.flush()
+# keyword = sys.argv[1]
+# print(findCountriesWithKeyword(keyword))
+# sys.stdout.flush()
 
-#Might be better to leave data with indices that way easier to recommend
+@app.route('/')
+def renderPage():
+    return render_template('front.html')
 
-#still have checklist option + random selector from list
+@app.route('/receiver', methods = ['POST'])
+def recommendGivenKeyword():
+    # keyword = request.get_json()      #Call a helper function
+    # return keyword
+    return 'Request received on port 5000'
+
+if __name__ == '__main__':
+    app.run()
