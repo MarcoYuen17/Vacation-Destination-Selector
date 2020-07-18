@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, Response
 import random, json
 import pandas as pd
-# import sys
 
 app = Flask(__name__)
 
@@ -25,19 +24,19 @@ def findCountriesWithKeyword(keyword):
             countries.append(country)
     return countries
 
-# keyword = sys.argv[1]
-# print(findCountriesWithKeyword(keyword))
-# sys.stdout.flush()
-
 @app.route('/')
 def renderPage():
     return render_template('front.html')
 
 @app.route('/receiver', methods = ['POST'])
 def recommendGivenKeyword():
-    # keyword = request.get_json()      #Call a helper function
-    # return keyword
-    return 'Request received on port 5000'
+    requestByteLiteral = request.get_data()      #Call a helper function to determine what to return
+    requestStringJson = requestByteLiteral.decode('utf-8')
+    keywordJson = json.loads(requestStringJson)
+    keyword = keywordJson['keyword']
+    print(keyword)
+
+    return 'Request received: ' + keyword
 
 if __name__ == '__main__':
     app.run()
