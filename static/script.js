@@ -1,15 +1,26 @@
-window.onload = function() {
-    document.getElementById('submitKeywordButton').onclick = function() {
-        submitKeyword();
-    }
-};
-
-function submitKeyword() {
+async function submitKeyword() {
+    event.preventDefault();
     const sample = {keyword: "warm"};
     const sampleJson = JSON.stringify(sample);
-    let keyword = document.getElementById('kind').value;
-    $.post("receiver", sampleJson, function(response) {
-        console.log(response);
+    const keyword = document.getElementById('kind').value;
+
+    const appResponse = await $.post("receiver", sampleJson, function(response) {
+        return response;
     });
-    event.preventDefault();
+    appResponseArray = JSON.parse(appResponse);
+    updateSiteResults(appResponseArray);
+}
+
+function updateSiteResults(responseArray) {
+    const sizeOfResponse = responseArray.length;
+
+
+    for (let i = 1; i <= sizeOfResponse; i++) {
+        selection = 'result' + i + 'checkbox';
+        document.getElementById(selection).style.visibility = 'visible';
+
+        label = 'result' + i + 'label';
+        resultToAdd = responseArray[i-1];
+        document.getElementById(label).innerHTML = resultToAdd;
+    }
 }

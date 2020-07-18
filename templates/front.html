@@ -16,45 +16,44 @@
                 <input type='text' name='kind' id='kind'>
             </section>
             <section class='submission'>
-                <!-- <input type='submit' value='Submit'> -->
-                <button onclick='submitKeyword()' id='submitKeywordButton'>Submit</button>
+                <button onclick='submitKeyword()' id='submitKeywordButton'>Submit</button> <!--remove id here?-->
             </section>
         </form>
 
         <section class='results_and_selections'>
             <div class='left'>
                 <h3>Results from search</h3>
-                <form method='POST'>
+                <form method='POST'> <!--method should be removed?-->
                     <h5>Please check the countries you would like to add to your list of selections.</h5>
+                    <input class='result' type='checkbox' name='result1' id='result1checkbox' value='result1'>
                     <label for='result1' id='result1label'></label>
-                    <input type='checkbox' name='result1' id='result1' value='result1'>
                     <br>
-                    <label for='result2'></label>
-                    <input type='checkbox' name='result2' id='result2' value='result2'>
+                    <input class='result' type='checkbox' name='result2' id='result2checkbox' value='result2'>
+                    <label for='result2' id='result2label'></label>
                     <br>
-                    <label for='result3'></label>
-                    <input type='checkbox' name='result3' id='result3' value='result3'>
+                    <input class='result' type='checkbox' name='result3' id='result3checkbox' value='result3'>
+                    <label for='result3' id='result3label'></label>
                     <br>
-                    <label for='result4'></label>
-                    <input type='checkbox' name='result4' id='result4' value='result4'>
+                    <input class='result' type='checkbox' name='result4' id='result4checkbox' value='result4'>
+                    <label for='result4' id='result4label'></label>
                     <br>
-                    <label for='result5'></label>
-                    <input type='checkbox' name='result5' id='result5' value='result5'>
+                    <input class='result' type='checkbox' name='result5' id='result5checkbox' value='result5'>
+                    <label for='result5' id='result5label'></label>
                     <br>
-                    <label for='result6'></label>
-                    <input type='checkbox' name='result6' id='result6' value='result6'>
+                    <input class='result' type='checkbox' name='result6' id='result6checkbox' value='result6'>
+                    <label for='result6' id='result6label'></label>
                     <br>
-                    <label for='result7'></label>
-                    <input type='checkbox' name='result7' id='result7' value='result7'>
+                    <input class='result' type='checkbox' name='result7' id='result7checkbox' value='result7'>
+                    <label for='result7' id='result7label'></label>
                     <br>
-                    <label for='result8'></label>
-                    <input type='checkbox' name='result8' id='result8' value='result8'>
+                    <input class='result' type='checkbox' name='result8' id='result8checkbox' value='result8'>
+                    <label for='result8' id='result8label'></label>
                     <br>
-                    <label for='result9'></label>
-                    <input type='checkbox' name='result9' id='result9' value='result9'>
+                    <input class='result' type='checkbox' name='result9' id='result9checkbox' value='result9'>
+                    <label for='result9' id='result9label'></label>
                     <br>
-                    <label for='result10'></label>
-                    <input type='checkbox' name='result10' id='result10' value='result10'>
+                    <input class='result' type='checkbox' name='result10' id='result10checkbox' value='result10'>
+                    <label for='result10' id='result10label'></label>
                     <br>
                     <br>
                     <button onclick='updateSelections()'>Update</button>
@@ -64,16 +63,16 @@
             <div class='right'>
                 <h3>Selections</h3>
                 <ul>
-                    <li class='selection1'></li>
-                    <li class='selection2'></li>
-                    <li class='selection3'></li>
-                    <li class='selection4'></li>
-                    <li class='selection5'></li>
-                    <li class='selection6'></li>
-                    <li class='selection7'></li>
-                    <li class='selection8'></li>
-                    <li class='selection9'></li>
-                    <li class='selection10'></li>
+                    <li class='selection' id='selection1'></li>
+                    <li class='selection' id='selection2'></li>
+                    <li class='selection' id='selection3'></li>
+                    <li class='selection' id='selection4'></li>
+                    <li class='selection' id='selection5'></li>
+                    <li class='selection' id='selection6'></li>
+                    <li class='selection' id='selection7'></li>
+                    <li class='selection' id='selection8'></li>
+                    <li class='selection' id='selection9'></li>
+                    <li class='selection' id='selection10'></li>
                 </ul>
             </div>
         </section>

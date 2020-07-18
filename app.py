@@ -30,13 +30,16 @@ def renderPage():
 
 @app.route('/receiver', methods = ['POST'])
 def recommendGivenKeyword():
-    requestByteLiteral = request.get_data()      #Call a helper function to determine what to return
+    requestByteLiteral = request.get_data()
     requestStringJson = requestByteLiteral.decode('utf-8')
     keywordJson = json.loads(requestStringJson)
     keyword = keywordJson['keyword']
-    print(keyword)
 
-    return 'Request received: ' + keyword
+    responseList = findCountriesWithKeyword(keyword)
+    response = json.dumps(responseList)
+    
+    return response
+
 
 if __name__ == '__main__':
     app.run()
