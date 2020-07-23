@@ -21,3 +21,15 @@
 .result, .selection {
     visibility: hidden;
 }
+
+.site_title {
+    text-align: center;
+}
+
+.returned_result {
+    visibility: hidden;
+}
+
+#update_selection_error {
+    visibility: hidden;
+}

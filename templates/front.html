@@ -10,6 +10,7 @@
     </head>
 
     <body>
+        <h1 class='site_title'>Vacation Destination Selector</h1>
         <form>
             <section class='question'>
                 <label for='kind'>What kind of place would you like to go to?<!--ex. america, warm--></label>
@@ -57,6 +58,7 @@
                     <br>
                     <br>
                     <button onclick='updateSelections()'>Update</button>
+                    <p id='update_selection_error'></p>
                 </form>
             </div>
 
@@ -78,8 +80,10 @@
         </section>
 
         <section class='random_chooser'>
-            <button type='button' onclick='returnRandomFromSelections()'>Take me somewhere from my selections!</button>
-            <button type='button' onclick='returnRandom()'>Take me anywhere!</button>
+            <button type='button' onclick='returnRandomFromSelections()'>Go somewhere from my selections!</button>
+            <button type='button' onclick='returnRandom()'>Go anywhere!</button>
+            <h3 class='returned_result' id='place_result'></h3>
+            <p class='returned_result' id='description_result'></p>
         </section>
     </body>
 </html>
