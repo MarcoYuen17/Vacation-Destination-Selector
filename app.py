@@ -57,12 +57,21 @@ def getRandomIndex():
 # Helper function for getRandomIndex()
 # Returns the place:description pair of the given index from the dictionary
 def getPairGivenIndex(index):
-    print(index)
     pair = list(dictionary.items())[index]
     place = pair[0]
     description = pair[1]
 
     return json.dumps([place, description])
+
+# For a given place, returns the description
+@app.route('/get_description', methods = ['POST'])
+def getDescriptionGivenPlace():
+    requestByteLiteral = request.get_data()
+    requestStringJson = requestByteLiteral.decode('utf-8')
+    placeJson = json.loads(requestStringJson)
+    place = placeJson['place']
+
+    return dictionary.get(place)
 
 # Runs the app
 if __name__ == '__main__':

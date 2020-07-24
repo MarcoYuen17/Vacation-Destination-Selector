@@ -102,7 +102,7 @@ function findFirstOpenSpot() {
 }
 
 // Chooses random place from activeSelections and displays it on the webpage
-function displayRandomFromSelections() {
+async function displayRandomFromSelections() {
     const numCurrentSelections = activeSelections.length;
     if (numCurrentSelections === 0) {
         document.getElementById(placeResultId).innerHTML = "There aren't any places in the selections list!";
@@ -110,10 +110,15 @@ function displayRandomFromSelections() {
     } else {
         const randomNumber = getRandomNumber(numCurrentSelections);
         randomSelectedPlace = activeSelections[randomNumber];
+        const jsonToSend = {place: randomSelectedPlace};
+        const jsonStringToSend = JSON.stringify(jsonToSend);
 
-        // const appResponse = await $.post('get_description', ) //TODO: get descriptions as well
+        const appResponse = await $.post('get_description', jsonStringToSend, function(response) {
+            return response;
+        }); //TODO: abstract
 
         document.getElementById(placeResultId).innerHTML = randomSelectedPlace;
+        document.getElementById(descriptionResultId).innerHTML = appResponse; //TODO: abstract?
     }
     makeResultVisible();    
 }
