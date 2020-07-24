@@ -32,9 +32,9 @@ def renderPage():
     return render_template('front.html')
 
 # Processes the submitKeyword() POST request from script.js
-@app.route('/receiver', methods = ['POST'])
+@app.route('/submit_keyword', methods = ['POST'])
 def recommendGivenKeyword():
-    requestByteLiteral = request.get_data()
+    requestByteLiteral = request.get_data() # TODO: Can abstract this out along with below function
     requestStringJson = requestByteLiteral.decode('utf-8')
     keywordJson = json.loads(requestStringJson)
     keyword = keywordJson['keyword']
@@ -43,6 +43,26 @@ def recommendGivenKeyword():
     response = json.dumps(responseList)
     
     return response
+
+# Processes the returnRandom() POST request from script.js
+@app.route('/random_index', methods = ['POST'])
+def getRandomIndex():
+    requestByteLiteral = request.get_data()
+    requestStringJson = requestByteLiteral.decode('utf-8')
+    indexJson = json.loads(requestStringJson)
+    index = indexJson['index']
+    
+    return getPairGivenIndex(index)
+
+# Helper function for getRandomIndex()
+# Returns the place:description pair of the given index from the dictionary
+def getPairGivenIndex(index):
+    print(index)
+    pair = list(dictionary.items())[index]
+    place = pair[0]
+    description = pair[1]
+
+    return json.dumps([place, description])
 
 # Runs the app
 if __name__ == '__main__':

@@ -1,4 +1,6 @@
-const updateSelectionErrorId = 'update_selection_error'
+const updateSelectionErrorId = 'update_selection_error';
+const placeResultId = 'place_result';
+const descriptionResultId = 'description_result';
 let activeSelections = [];
 
 // Submits inputted keyword to app.py and returns response to webpage
@@ -8,7 +10,7 @@ async function submitKeyword() {
     const jsonToSend = {keyword: keyword};
     const jsonStringToSend = JSON.stringify(jsonToSend);
 
-    const appResponse = await $.post('receiver', jsonStringToSend, function(response) {
+    const appResponse = await $.post('submit_keyword', jsonStringToSend, function(response) {
         return response;
     });
     appResponseArray = JSON.parse(appResponse);
@@ -100,21 +102,20 @@ function findFirstOpenSpot() {
 }
 
 // Chooses random place from activeSelections and displays it on the webpage
-function returnRandomFromSelections() {
+function displayRandomFromSelections() {
     const numCurrentSelections = activeSelections.length;
     if (numCurrentSelections === 0) {
-        document.getElementById('place_result').innerHTML = "There aren't any places in the selections list!";
+        document.getElementById(placeResultId).innerHTML = "There aren't any places in the selections list!";
+        document.getElementById(descriptionResultId).innerHTML = '';
     } else {
         const randomNumber = getRandomNumber(numCurrentSelections);
-        document.getElementById('place_result').innerHTML = activeSelections[randomNumber];
+        randomSelectedPlace = activeSelections[randomNumber];
+
+        // const appResponse = await $.post('get_description', ) //TODO: get descriptions as well
+
+        document.getElementById(placeResultId).innerHTML = randomSelectedPlace;
     }
     makeResultVisible();    
-}
-
-// Helper function for returnRandomFromSelections()
-// Returns a random number from 0 to a given number, not including the given number
-function getRandomNumber(maximum) {
-    return Math.floor(Math.random() * maximum);
 }
 
 // Helper function for returnRandomFromSelections()
@@ -126,6 +127,28 @@ function makeResultVisible() {
     }
 }
 
-function returnRandom() {
-    //stub
+// Submits random index to app.py and displays the place at that index on the webpage
+async function displayRandom() {
+    const randomNumber = getRandomNumber(175) + 1; // Random number in the range of the number of countries in the .csv
+    const jsonToSend = {index: randomNumber};
+    const jsonStringToSend = JSON.stringify(jsonToSend);
+
+    const appResponse = await $.post('random_index', jsonStringToSend, function(response) {
+        return response;
+    });
+    appResponseJson = JSON.parse(appResponse);
+
+    place = appResponseJson[0];
+    description = appResponseJson[1];
+
+    document.getElementById(placeResultId).innerHTML = place;
+    document.getElementById(descriptionResultId).innerHTML = description;
+
+    makeResultVisible();
+}
+
+// Helper function for returnRandomFromSelections() and returnRandom()
+// Returns a random number from 0 to a given number, not including the given number
+function getRandomNumber(maximum) {
+    return Math.floor(Math.random() * maximum);
 }
