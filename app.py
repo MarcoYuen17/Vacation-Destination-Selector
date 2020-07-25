@@ -18,60 +18,58 @@ while i < len(places):
     dictionary[place] = description
     i += 1
 
-# Returns array of countries with descriptions containing the given keyword
-def findCountriesWithKeyword(keyword):
-    countries = []
-    for country in dictionary:
-        if (keyword in dictionary[country]):
-            countries.append(country)
-    return countries
-
 # Renders the webpage upon loading
 @app.route('/')
 def renderPage():
     return render_template('front.html')
 
-# Processes the submitKeyword() POST request from script.js
-@app.route('/submit_keyword', methods = ['POST'])
-def recommendGivenKeyword():
-    requestByteLiteral = request.get_data() # TODO: Can abstract this out along with below function
-    requestStringJson = requestByteLiteral.decode('utf-8')
-    keywordJson = json.loads(requestStringJson)
-    keyword = keywordJson['keyword']
-
-    responseList = findCountriesWithKeyword(keyword)
-    response = json.dumps(responseList)
-    
-    return response
-
-# Processes the returnRandom() POST request from script.js
-@app.route('/random_index', methods = ['POST'])
-def getRandomIndex():
+# Handles incoming POST request and dispatches information to functions
+@app.route('/post_receiver', methods = ['POST'])
+def handlePOSTRequest():
     requestByteLiteral = request.get_data()
     requestStringJson = requestByteLiteral.decode('utf-8')
-    indexJson = json.loads(requestStringJson)
-    index = indexJson['index']
-    
-    return getPairGivenIndex(index)
+    jsonObject = json.loads(requestStringJson)
 
-# Helper function for getRandomIndex()
-# Returns the place:description pair of the given index from the dictionary
-def getPairGivenIndex(index):
+    data = jsonObject['information']
+    functionName = jsonObject['operation']
+
+    response = 'There was an error during function dispatch.'
+
+    if functionName == 'recommendGivenKeyword':
+        response = recommendGivenKeyword(data)
+    elif functionName == 'getPairRandomIndex':
+        response = getPairRandomIndex(data)
+    elif functionName == 'getDescriptionGivenPlace':
+        response = getDescriptionGivenPlace(data)
+
+    return response
+
+# Returns array of countries with descriptions containing the given keyword
+def recommendGivenKeyword(keyword):
+    countries = []
+    for country in dictionary:
+        if (keyword in dictionary[country]):
+            countries.append(country)
+    
+    recommendedArrayString = json.dumps(countries)
+    
+    return recommendedArrayString
+    
+# Given a random index, returns the place:description pair from the dictionary
+def getPairRandomIndex(index):
     pair = list(dictionary.items())[index]
     place = pair[0]
     description = pair[1]
 
-    return json.dumps([place, description])
+    pairArrayString = json.dumps([place, description])
 
+    return pairArrayString
+    
 # For a given place, returns the description
-@app.route('/get_description', methods = ['POST'])
-def getDescriptionGivenPlace():
-    requestByteLiteral = request.get_data()
-    requestStringJson = requestByteLiteral.decode('utf-8')
-    placeJson = json.loads(requestStringJson)
-    place = placeJson['place']
-
-    return dictionary.get(place)
+def getDescriptionGivenPlace(place):
+    description = dictionary.get(place)
+    
+    return description
 
 # Runs the app
 if __name__ == '__main__':

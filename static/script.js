@@ -7,13 +7,10 @@ let activeSelections = [];
 async function submitKeyword() {
     event.preventDefault();
     const keyword = document.getElementById('kind').value;
-    const jsonToSend = {keyword: keyword};
-    const jsonStringToSend = JSON.stringify(jsonToSend);
 
-    const appResponse = await $.post('submit_keyword', jsonStringToSend, function(response) {
-        return response;
-    });
+    const appResponse = await doPOSTRequest('recommendGivenKeyword', keyword);
     appResponseArray = JSON.parse(appResponse);
+
     updateSiteResults(appResponseArray);
 }
 
@@ -84,7 +81,10 @@ function addPlacesToSelections(places) {
             activeSelections.push(place);
         }
     } else {
-        document.getElementById(updateSelectionErrorId).innerHTML = 'There are already 10 selections. Please remove some before adding more.'
+        const displayErrorElement = document.getElementById(updateSelectionErrorId);
+        displayErrorElement.innerHTML = 'There are already 10 selections. Please remove some before adding more.';
+        displayErrorElement.style.visibility = 'visible';
+        console.log('test');
     }
 }
 
@@ -110,12 +110,8 @@ async function displayRandomFromSelections() {
     } else {
         const randomNumber = getRandomNumber(numCurrentSelections);
         randomSelectedPlace = activeSelections[randomNumber];
-        const jsonToSend = {place: randomSelectedPlace};
-        const jsonStringToSend = JSON.stringify(jsonToSend);
 
-        const appResponse = await $.post('get_description', jsonStringToSend, function(response) {
-            return response;
-        }); //TODO: abstract
+        const appResponse = await doPOSTRequest('getDescriptionGivenPlace', randomSelectedPlace);
 
         document.getElementById(placeResultId).innerHTML = randomSelectedPlace;
         document.getElementById(descriptionResultId).innerHTML = appResponse; //TODO: abstract?
@@ -135,12 +131,8 @@ function makeResultVisible() {
 // Submits random index to app.py and displays the place at that index on the webpage
 async function displayRandom() {
     const randomNumber = getRandomNumber(175) + 1; // Random number in the range of the number of countries in the .csv
-    const jsonToSend = {index: randomNumber};
-    const jsonStringToSend = JSON.stringify(jsonToSend);
 
-    const appResponse = await $.post('random_index', jsonStringToSend, function(response) {
-        return response;
-    });
+    const appResponse = await doPOSTRequest('getPairRandomIndex', randomNumber);
     appResponseJson = JSON.parse(appResponse);
 
     place = appResponseJson[0];
@@ -150,6 +142,18 @@ async function displayRandom() {
     document.getElementById(descriptionResultId).innerHTML = description;
 
     makeResultVisible();
+}
+
+// Helper function for functions requiring communication with server
+// Facilitates POST request
+function doPOSTRequest(functionName, data) {
+    const jsonToSend = {operation: functionName,
+                        information: data};
+    const jsonStringToSend = JSON.stringify(jsonToSend);
+    
+    return $.post('post_receiver', jsonStringToSend, function(response) {
+        return response;
+    });
 }
 
 // Helper function for returnRandomFromSelections() and returnRandom()
