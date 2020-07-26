@@ -1,4 +1,5 @@
 const updateSelectionErrorId = 'update_selection_error';
+const updateSelectionErrorElement = document.getElementById('update_selection_error');
 const placeResultId = 'place_result';
 const descriptionResultId = 'description_result';
 let activeSelections = [];
@@ -61,12 +62,12 @@ function addPlacesToSelections(places) {
     const firstOpenSpot = findFirstOpenSpot();
     if (firstOpenSpot > 0) {
         const numOpenSpots = 10 - firstOpenSpot + 1; //10 is number of total spots, +1 is to include first open spot
+        const displayErrorElement = document.getElementById(updateSelectionErrorId);
         for (let i = 0; i <= numOpenSpots; i++) {
 
             if (i >= places.length) {
                 break;
             } else if (i === numOpenSpots) {
-                const displayErrorElement = document.getElementById(updateSelectionErrorId);
                 displayErrorElement.innerHTML = 'Some places were not added to the selections because there are now 10 selections. Please remove some before adding more.';
                 displayErrorElement.style.visibility = 'visible';
                 break;
@@ -84,7 +85,6 @@ function addPlacesToSelections(places) {
         const displayErrorElement = document.getElementById(updateSelectionErrorId);
         displayErrorElement.innerHTML = 'There are already 10 selections. Please remove some before adding more.';
         displayErrorElement.style.visibility = 'visible';
-        console.log('test');
     }
 }
 
@@ -105,16 +105,14 @@ function findFirstOpenSpot() {
 async function displayRandomFromSelections() {
     const numCurrentSelections = activeSelections.length;
     if (numCurrentSelections === 0) {
-        document.getElementById(placeResultId).innerHTML = "There aren't any places in the selections list!";
-        document.getElementById(descriptionResultId).innerHTML = '';
+        displayResults("There aren't any places in the selections list!", '');
     } else {
         const randomNumber = getRandomNumber(numCurrentSelections);
         randomSelectedPlace = activeSelections[randomNumber];
 
         const appResponse = await doPOSTRequest('getDescriptionGivenPlace', randomSelectedPlace);
 
-        document.getElementById(placeResultId).innerHTML = randomSelectedPlace;
-        document.getElementById(descriptionResultId).innerHTML = appResponse; //TODO: abstract?
+        displayResults(randomSelectedPlace, appResponse);
     }
     makeResultVisible();    
 }
@@ -138,10 +136,16 @@ async function displayRandom() {
     place = appResponseJson[0];
     description = appResponseJson[1];
 
-    document.getElementById(placeResultId).innerHTML = place;
-    document.getElementById(descriptionResultId).innerHTML = description;
+    displayResults(place, description);
 
     makeResultVisible();
+}
+
+// Helper function for displayRandom() & displayRandomFromSelections()
+// Displays result place and description on the webpage
+function displayResults(place, description) {
+    document.getElementById(placeResultId).innerHTML = place;
+    document.getElementById(descriptionResultId).innerHTML = description;
 }
 
 // Helper function for functions requiring communication with server
@@ -160,4 +164,31 @@ function doPOSTRequest(functionName, data) {
 // Returns a random number from 0 to a given number, not including the given number
 function getRandomNumber(maximum) {
     return Math.floor(Math.random() * maximum);
+}
+
+// Removes a place from the list of activeSelections and removes it from display on the webpage
+function removeSelection(element) {
+    place = element.innerHTML;
+    element.innerHTML = '';
+    activeSelections = activeSelections.filter(function(value) { //TODO: Helper?
+        return value !== place;
+    });
+    const idNumRemoved = parseInt(element.id.substr('selection'.length), 10);
+    for (let i = idNumRemoved; i <= 10; i++) {
+        elementToReplace = document.getElementById('selection' + i);
+        if (i < 10) {
+            const idNumToMoveUp = i + 1;
+            const textToMoveUp = document.getElementById('selection' + idNumToMoveUp).innerHTML;
+            if (!textToMoveUp) {
+                elementToReplace.style.visibility = 'hidden';
+            } 
+            elementToReplace.innerHTML = textToMoveUp;
+        } else {
+            elementToReplace.innerHTML = '';
+            elementToReplace.style.visibility = 'hidden';
+        }
+    }
+    const displayErrorElement = document.getElementById(updateSelectionErrorId); //TODO: Create helper function
+    displayErrorElement.innerHTML = '';
+    displayErrorElement.style.visibility = 'hidden';
 }

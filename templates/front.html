@@ -57,24 +57,25 @@
                     <label for='result10' id='result10label'></label>
                     <br>
                     <br>
-                    <button onclick='updateSelections()'>Update</button>
+                    <button onclick='updateSelections()'>Add above to selections</button>
                     <p id='update_selection_error'></p>
                 </form>
             </div>
 
             <div class='right'>
                 <h3>Selections</h3>
+                <h5>Please click the countries you would like to remove from your list of selections.</h5>
                 <ul>
-                    <li class='selection' id='selection1'></li>
-                    <li class='selection' id='selection2'></li>
-                    <li class='selection' id='selection3'></li>
-                    <li class='selection' id='selection4'></li>
-                    <li class='selection' id='selection5'></li>
-                    <li class='selection' id='selection6'></li>
-                    <li class='selection' id='selection7'></li>
-                    <li class='selection' id='selection8'></li>
-                    <li class='selection' id='selection9'></li>
-                    <li class='selection' id='selection10'></li>
+                    <li class='selection' id='selection1' onclick='removeSelection(this)'></li> <!--TODO: add onhover-->
+                    <li class='selection' id='selection2' onclick='removeSelection(this)'></li>
+                    <li class='selection' id='selection3' onclick='removeSelection(this)'></li>
+                    <li class='selection' id='selection4' onclick='removeSelection(this)'></li>
+                    <li class='selection' id='selection5' onclick='removeSelection(this)'></li>
+                    <li class='selection' id='selection6' onclick='removeSelection(this)'></li>
+                    <li class='selection' id='selection7' onclick='removeSelection(this)'></li>
+                    <li class='selection' id='selection8' onclick='removeSelection(this)'></li>
+                    <li class='selection' id='selection9' onclick='removeSelection(this)'></li>
+                    <li class='selection' id='selection10' onclick='removeSelection(this)'></li>
                 </ul>
             </div>
         </section>
