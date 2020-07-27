@@ -72,10 +72,12 @@ function addPlacesToSelections(places) {
 
             const selectionNum = 'selection' + (i + firstOpenSpot);
             const selectionElement = document.getElementById(selectionNum);
+            const selectionContainerElement = document.getElementById(selectionNum + '_container');
 
             const place = places[i]
             selectionElement.innerHTML = place;
-            selectionElement.style.visibility = 'visible';
+            selectionContainerElement.style.visibility = 'visible';
+
             activeSelections.push(place);
         }
     } else {
@@ -173,17 +175,18 @@ function removeSelection(element) {
     const idNumRemoved = parseInt(element.id.substr('selection'.length), 10);
     
     for (let i = idNumRemoved; i <= 10; i++) {
-        elementToReplace = document.getElementById('selection' + i);
+        const elementToBeReplaced = document.getElementById('selection' + i);
+        const containerElementToBeReplaced = document.getElementById('selection' + i + '_container');
         if (i < 10) {
             const idNumToMoveUp = i + 1;
             const textToMoveUp = document.getElementById('selection' + idNumToMoveUp).innerHTML;
             if (!textToMoveUp) {
-                elementToReplace.style.visibility = 'hidden';
+                containerElementToBeReplaced.style.visibility = 'hidden';
             } 
-            elementToReplace.innerHTML = textToMoveUp;
+            elementToBeReplaced.innerHTML = textToMoveUp;
         } else {
-            elementToReplace.innerHTML = '';
-            elementToReplace.style.visibility = 'hidden';
+            elementToBeReplaced.innerHTML = '';
+            containerElementToBeReplaced.style.visibility = 'hidden';
         }
     }
 

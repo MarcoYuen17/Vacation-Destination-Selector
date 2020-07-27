@@ -26,36 +26,46 @@
                 <h3>First 10 results from search</h3>
                 <form>
                     <h5>Please check the countries you would like to add to your list of selections.</h5>
-                    <input class='result' type='checkbox' name='result1' id='result1checkbox'>
-                    <label for='result1' id='result1label'></label>
-                    <br>
-                    <input class='result' type='checkbox' name='result2' id='result2checkbox'>
-                    <label for='result2' id='result2label'></label>
-                    <br>
-                    <input class='result' type='checkbox' name='result3' id='result3checkbox'>
-                    <label for='result3' id='result3label'></label>
-                    <br>
-                    <input class='result' type='checkbox' name='result4' id='result4checkbox'>
-                    <label for='result4' id='result4label'></label>
-                    <br>
-                    <input class='result' type='checkbox' name='result5' id='result5checkbox'>
-                    <label for='result5' id='result5label'></label>
-                    <br>
-                    <input class='result' type='checkbox' name='result6' id='result6checkbox'>
-                    <label for='result6' id='result6label'></label>
-                    <br>
-                    <input class='result' type='checkbox' name='result7' id='result7checkbox'>
-                    <label for='result7' id='result7label'></label>
-                    <br>
-                    <input class='result' type='checkbox' name='result8' id='result8checkbox'>
-                    <label for='result8' id='result8label'></label>
-                    <br>
-                    <input class='result' type='checkbox' name='result9' id='result9checkbox'>
-                    <label for='result9' id='result9label'></label>
-                    <br>
-                    <input class='result' type='checkbox' name='result10' id='result10checkbox'>
-                    <label for='result10' id='result10label'></label>
-                    <br>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result1' id='result1checkbox'>
+                        <label for='result1' id='result1label'></label>    
+                    </div>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result2' id='result2checkbox'>
+                        <label for='result2' id='result2label'></label>
+                    </div>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result3' id='result3checkbox'>
+                        <label for='result3' id='result3label'></label>                        
+                    </div>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result4' id='result4checkbox'>
+                        <label for='result4' id='result4label'></label>                        
+                    </div>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result5' id='result5checkbox'>
+                        <label for='result5' id='result5label'></label>                            
+                    </div>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result6' id='result6checkbox'>
+                        <label for='result6' id='result6label'></label>                        
+                    </div>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result7' id='result7checkbox'>
+                        <label for='result7' id='result7label'></label>                        
+                    </div>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result8' id='result8checkbox'>
+                        <label for='result8' id='result8label'></label>                        
+                    </div>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result9' id='result9checkbox'>
+                        <label for='result9' id='result9label'></label>                        
+                    </div>
+                    <div class='result_container'>
+                        <input class='result' type='checkbox' name='result10' id='result10checkbox'>
+                        <label for='result10' id='result10label'></label>
+                    </div>
                     <br>
                     <button onclick='updateSelections()'>Add above to selections</button>
                     <p id='update_selection_error'></p>
@@ -65,22 +75,43 @@
             <div class='right'>
                 <h3>Selections</h3>
                 <h5>Please click the countries you would like to remove from your list of selections.</h5>
-                <ul>
-                    <li class='selection' id='selection1' onclick='removeSelection(this)'></li> <!--TODO: add onhover-->
-                    <li class='selection' id='selection2' onclick='removeSelection(this)'></li>
-                    <li class='selection' id='selection3' onclick='removeSelection(this)'></li>
-                    <li class='selection' id='selection4' onclick='removeSelection(this)'></li>
-                    <li class='selection' id='selection5' onclick='removeSelection(this)'></li>
-                    <li class='selection' id='selection6' onclick='removeSelection(this)'></li>
-                    <li class='selection' id='selection7' onclick='removeSelection(this)'></li>
-                    <li class='selection' id='selection8' onclick='removeSelection(this)'></li>
-                    <li class='selection' id='selection9' onclick='removeSelection(this)'></li>
-                    <li class='selection' id='selection10' onclick='removeSelection(this)'></li>
-                </ul>
+                <ol>
+                    <li class='selection_container' id='selection1_container'>
+                        <span class='selection' id='selection1' onclick='removeSelection(this)'></span>
+                    </li>
+                    <li class='selection_container' id='selection2_container'>
+                        <span class='selection' id='selection2' onclick='removeSelection(this)'></span>
+                    </li>
+                    <li class='selection_container' id='selection3_container'>
+                        <span class='selection' id='selection3' onclick='removeSelection(this)'></span>
+                    </li>
+                    <li class='selection_container' id='selection4_container'>
+                        <span class='selection' id='selection4' onclick='removeSelection(this)'></span>
+                    </li>
+                    <li class='selection_container' id='selection5_container'>
+                        <span class='selection' id='selection5' onclick='removeSelection(this)'></span>
+                    </li>
+                    <li class='selection_container' id='selection6_container'>
+                        <span class='selection' id='selection6' onclick='removeSelection(this)'></span>
+                    </li>
+                    <li class='selection_container' id='selection7_container'>
+                        <span class='selection' id='selection7' onclick='removeSelection(this)'></span>
+                    </li>
+                    <li class='selection_container' id='selection8_container'>
+                        <span class='selection' id='selection8' onclick='removeSelection(this)'></span>
+                    </li>
+                    <li class='selection_container' id='selection9_container'>
+                        <span class='selection' id='selection9' onclick='removeSelection(this)'></span>
+                    </li>
+                    <li class='selection_container' id='selection10_container'>
+                        <span class='selection' id='selection10' onclick='removeSelection(this)'></span>
+                    </li>
+                </ol>
             </div>
         </section>
 
         <section class='random_chooser'>
+            <h2>Random Selector</h2>
             <button type='button' onclick='displayRandomFromSelections()'>Go somewhere from my selections!</button>
             <button type='button' onclick='displayRandom()'>Go anywhere!</button>
             <h3 class='returned_result' id='place_result'></h3>

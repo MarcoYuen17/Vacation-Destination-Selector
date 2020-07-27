@@ -15,11 +15,28 @@
 }
 
 .random_chooser {
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
-.result, .selection {
+.result_container {
+    display: block;
+    padding: 0.25em;
+}
+
+.result, .selection_container {
+    padding: 0.25em;
     visibility: hidden;
+}
+
+.selection {
+    padding: 0.2em;
+    border-radius: 15px;
+    background-color: white;
+    transition: background-color 0.5s;
+}
+
+.selection:hover {
+    background-color: lightcoral;
 }
 
 .site_title {
