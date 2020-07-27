@@ -1,5 +1,4 @@
 const updateSelectionErrorId = 'update_selection_error';
-const updateSelectionErrorElement = document.getElementById('update_selection_error');
 const placeResultId = 'place_result';
 const descriptionResultId = 'description_result';
 let activeSelections = [];
@@ -62,14 +61,12 @@ function addPlacesToSelections(places) {
     const firstOpenSpot = findFirstOpenSpot();
     if (firstOpenSpot > 0) {
         const numOpenSpots = 10 - firstOpenSpot + 1; //10 is number of total spots, +1 is to include first open spot
-        const displayErrorElement = document.getElementById(updateSelectionErrorId);
         for (let i = 0; i <= numOpenSpots; i++) {
 
             if (i >= places.length) {
                 break;
             } else if (i === numOpenSpots) {
-                displayErrorElement.innerHTML = 'Some places were not added to the selections because there are now 10 selections. Please remove some before adding more.';
-                displayErrorElement.style.visibility = 'visible';
+                updateSelectionError('Some places were not added to the selections because there are now 10 selections. Please remove some before adding more.', 'visible');
                 break;
             }
 
@@ -82,9 +79,7 @@ function addPlacesToSelections(places) {
             activeSelections.push(place);
         }
     } else {
-        const displayErrorElement = document.getElementById(updateSelectionErrorId);
-        displayErrorElement.innerHTML = 'There are already 10 selections. Please remove some before adding more.';
-        displayErrorElement.style.visibility = 'visible';
+        updateSelectionError('There are already 10 selections. Please remove some before adding more.', 'visible');
     }
 }
 
@@ -169,11 +164,14 @@ function getRandomNumber(maximum) {
 // Removes a place from the list of activeSelections and removes it from display on the webpage
 function removeSelection(element) {
     place = element.innerHTML;
-    element.innerHTML = '';
-    activeSelections = activeSelections.filter(function(value) { //TODO: Helper?
+    activeSelections = activeSelections.filter(function(value) {
         return value !== place;
     });
+
+    element.innerHTML = '';
+
     const idNumRemoved = parseInt(element.id.substr('selection'.length), 10);
+    
     for (let i = idNumRemoved; i <= 10; i++) {
         elementToReplace = document.getElementById('selection' + i);
         if (i < 10) {
@@ -188,7 +186,14 @@ function removeSelection(element) {
             elementToReplace.style.visibility = 'hidden';
         }
     }
-    const displayErrorElement = document.getElementById(updateSelectionErrorId); //TODO: Create helper function
-    displayErrorElement.innerHTML = '';
-    displayErrorElement.style.visibility = 'hidden';
+
+    updateSelectionError('', 'hidden');
+}
+
+// Helper function for functions which manipulate the update_selection_error element
+// Updates the text and visibility of the update_selection_error element
+function updateSelectionError(newValue, newVisibility) {
+    const displayErrorElement = document.getElementById(updateSelectionErrorId);
+    displayErrorElement.innerHTML = newValue;
+    displayErrorElement.style.visibility = newVisibility;
 }
