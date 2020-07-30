@@ -1,3 +1,8 @@
+body {
+    font-family: 'Concert One', Helvetica;
+    font-size: 1.025em; /*TODO: add space for large descriptions*/
+}
+
 .results_and_selections {
     display: flex;
 }
@@ -11,11 +16,11 @@
 }
 
 .results_and_selections {
-    margin-top: 50px;
+    margin-top: 2.5%;
 }
 
 .random_chooser {
-    margin-top: 50px;
+    margin-top: 2%;
 }
 
 .result_container {
@@ -24,13 +29,13 @@
 }
 
 .result, .selection_container {
-    padding: 0.25em;
+    padding: 0.2em;
     visibility: hidden;
 }
 
 .selection {
-    padding: 0.2em;
-    border-radius: 15px;
+    padding: 0.125em;
+    border-radius: 12.5px;
     background-color: white;
     transition: background-color 0.5s;
 }
@@ -49,4 +54,14 @@
 
 #update_selection_error {
     visibility: hidden;
+}
+
+#backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -10;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }

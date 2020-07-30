@@ -15,7 +15,7 @@ async function submitKeyword() {
 }
 
 // Updates "Results" region of webpage
-function updateSiteResults(responseArray) { //TODO: Add more space in HTML if there are many results
+function updateSiteResults(responseArray) {
     const sizeOfResponse = responseArray.length;
 
     for (let i = 1; i <= 10; i++) {
@@ -24,7 +24,7 @@ function updateSiteResults(responseArray) { //TODO: Add more space in HTML if th
         const labelNum = resultNum + 'label';
 
         if (i <= sizeOfResponse) {
-            document.getElementById(checkboxNum).style.visibility = 'visible'; //TODO: Replace with JQuery?
+            document.getElementById(checkboxNum).style.visibility = 'visible';
 
             resultToAdd = responseArray[i-1];
             document.getElementById(labelNum).innerHTML = resultToAdd;
@@ -165,14 +165,10 @@ function getRandomNumber(maximum) {
 
 // Removes a place from the list of activeSelections and removes it from display on the webpage
 function removeSelection(element) {
-    place = element.innerHTML;
-    activeSelections = activeSelections.filter(function(value) {
-        return value !== place;
-    });
-
     element.innerHTML = '';
 
     const idNumRemoved = parseInt(element.id.substr('selection'.length), 10);
+    activeSelections.splice(idNumRemoved - 1, 1);
     
     for (let i = idNumRemoved; i <= 10; i++) {
         const elementToBeReplaced = document.getElementById('selection' + i);
