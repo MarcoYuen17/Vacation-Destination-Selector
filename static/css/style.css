@@ -1,6 +1,18 @@
+html {
+    background-image: url(../vacation_backdrop.jpg);
+    background-size: cover;
+    height: 100%;
+}
+
 body {
-    font-family: 'Concert One', Helvetica;
-    font-size: 1.025em; /*TODO: add space for large descriptions*/
+    font-size: 1.1em;
+    color: #ffbe38;
+    text-shadow: black 1px 1px 1px,
+                 black -1px 1px 1px,
+                 black -1px -1px 1px,
+                 black 1px -1px 1px;
+    text-align: center;
+    font-family: 'Raleway', Helvetica;
 }
 
 .results_and_selections {
@@ -15,12 +27,8 @@ body {
     width: 50%;
 }
 
-.results_and_selections {
-    margin-top: 2.5%;
-}
-
 .random_chooser {
-    margin-top: 2%;
+    margin-top: -1%;
 }
 
 .result_container {
