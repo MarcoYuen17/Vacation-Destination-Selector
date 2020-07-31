@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>
-            Vacation Destination Selector
+            Random Vacation Destination Selector
         </title>
         <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
         <link href='../static/css/style.css' rel='stylesheet' type='text/css'>
@@ -11,22 +11,24 @@
     </head>
 
     <body>
-        <h1 class='site_title'>Vacation Destination Selector</h1>
-        <form>
-            <section class='question'>
-                <label for='kind'>What kind of place would you like to go to?</label>
-                <input type='text' name='kind' id='kind'>
-            </section>
-            <section class='submission'>
-                <button onclick='submitKeyword()'>Submit</button>
-            </section>
-        </form>
+        <header class='align_center'>
+            <h1 class='site_title'>Random Vacation Destination Selector</h1>
+            <form class='keyword_query'>
+                <section class='question'>
+                    <label id='question_label' for='kind'>What kind of place would you like to go to?</label>
+                    <input type='text' name='kind' id='kind'>
+                </section>
+                <section class='submission'>
+                    <h4 class='button' onclick='submitKeyword()'>Submit</h4>
+                </section>
+            </form>    
+        </header>
 
         <section class='results_and_selections'>
             <div class='left'>
-                <h3>First 10 results from search</h3>
+                <h3 class='align_center'>First 10 results from search</h3>
                 <form>
-                    <h5>Please check the countries you would like to add to your list of selections.</h5>
+                    <h5 class='align_center'>Please check the countries you would like to add to your list of selections.</h5>
                     <div class='result_container'>
                         <input class='result' type='checkbox' name='result1' id='result1checkbox'>
                         <label for='result1' id='result1label'></label>    
@@ -68,14 +70,17 @@
                         <label for='result10' id='result10label'></label>
                     </div>
                     <br>
-                    <button onclick='updateSelections()'>Add above to selections</button> <!--TODO: make button same as text in selections-->
+                    <div class='align_center'>
+                        <h4 class='button' onclick='updateSelections()'>Add above places to selections</h4>
+
+                    </div>
                     <p id='update_selection_error'></p>
                 </form>
             </div>
 
             <div class='right'>
-                <h3>Selections</h3>
-                <h5>Please click the countries you would like to remove from your list of selections.</h5>
+                <h3 class='align_center'>Selections</h3>
+                <h5 class='align_center'>Please click the countries you would like to remove from your list of selections.</h5>
                 <ol>
                     <li class='selection_container' id='selection1_container'>
                         <span class='selection' id='selection1' onclick='removeSelection(this)'></span>
@@ -111,10 +116,10 @@
             </div>
         </section>
 
-        <section class='random_chooser'>
+        <section class='random_chooser align_center'>
             <h2>Random Selector</h2>
-            <button type='button' onclick='displayRandomFromSelections()'>Go somewhere from my selections!</button>
-            <button type='button' onclick='displayRandom()'>Go anywhere!</button>
+            <h4 class='button' onclick='displayRandomFromSelections()'>Go somewhere from my selections!</h4>
+            <h4 class='button' onclick='displayRandom()'>Go anywhere!</h4>
             <h3 class='returned_result' id='place_result'></h3>
             <p class='returned_result' id='description_result'></p>
         </section>
