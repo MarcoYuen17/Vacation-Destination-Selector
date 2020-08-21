@@ -2,7 +2,7 @@
 - Web application which recommends a country as a vacation destination based on a keyword input of the user's choice
 - Vacation destination data scraped from https://www.roamright.com/country/list/
 
-### Main screen:
+#### Main screen:
 ![](readme_app_pictures/main_screen.png 'Main Screen')
 
 #### Click "Go Anywhere!":
