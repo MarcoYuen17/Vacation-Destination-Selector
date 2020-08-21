@@ -4,7 +4,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-dataframe = pd.read_csv('places_descriptions.csv') #TODO: add README
+dataframe = pd.read_csv('places_descriptions.csv')
 
 dictionary_from_dataframe = dataframe.to_dict()
 dictionary = {}
